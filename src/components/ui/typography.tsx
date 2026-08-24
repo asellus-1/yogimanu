@@ -7,7 +7,7 @@ function cn(...inputs: ClassValue[]) {
 }
 
 export function Heading({ level = 2, variant, className, children, ...props }: { level?: 1 | 2 | 3 | 4 | 5 | 6, variant?: "display" | "heading", className?: string, children: React.ReactNode } & React.HTMLAttributes<HTMLHeadingElement>) {
-  const Tag = `h${level}` as any;
+  const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   const classes = variant === "display" ? "text-4xl md:text-6xl font-bold" : "text-2xl md:text-4xl font-semibold";
   return <Tag className={cn(classes, className)} {...props}>{children}</Tag>;
 }

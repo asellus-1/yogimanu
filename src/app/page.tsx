@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { HeroSection } from "@/components/blocks/HeroSection";
 import { ChannelsSection } from "@/components/blocks/ChannelsSection";
 import { AboutSection } from "@/components/blocks/AboutSection";
+import { ThreePillarsSection } from "@/components/blocks/ThreePillarsSection";
 import { JourneySection } from "@/components/blocks/JourneySection";
 import { MaharajJiSection } from "@/components/blocks/MaharajJiSection";
 import { OfferingsSection } from "@/components/blocks/OfferingsSection";
@@ -27,6 +28,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <AboutSection />
+      <ThreePillarsSection />
       <ChannelsSection />
       <JourneySection />
       <MaharajJiSection />

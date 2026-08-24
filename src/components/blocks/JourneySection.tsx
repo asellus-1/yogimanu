@@ -68,7 +68,7 @@ export function JourneySection() {
           />
 
           <ol className="space-y-16 md:space-y-0" aria-label="Yogi Manu's journey">
-            {milestones.map((m, i) => (
+            {milestones.map((m) => (
               <li key={m.id} className="relative md:grid md:grid-cols-2 md:gap-16 md:mb-20">
                 {/* Content – alternates sides on desktop */}
                 <FadeIn

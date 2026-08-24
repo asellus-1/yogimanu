@@ -1,17 +1,16 @@
 "use client";
-
-import { useEffect } from "react";
+ 
+/* eslint-disable @typescript-eslint/no-explicit-any, prefer-rest-params */
+import { useEffect, useState } from "react";
 import { FadeIn } from "@/components/shared/FadeIn";
 import { motion } from "framer-motion";
 import Script from "next/script";
-
-
-
+ 
 // ─── Configure Cal.com Booking Links here ──────────────────────────────
 // Live Session event attributes are embedded directly below.
 // Other offerings are asynchronous and do not require scheduling.
 // ───────────────────────────────────────────────────────────────────────
-
+ 
 const offerings = [
   {
     id: "single",
@@ -86,8 +85,19 @@ const offerings = [
     featured: true,
   },
 ];
-
+ 
 export function TarotOptions() {
+  const [stripeLoaded, setStripeLoaded] = useState(false);
+ 
+  // Check if Stripe is already loaded on mount
+  useEffect(() => {
+    if (typeof window !== "undefined" && (window as any).customElements?.get("stripe-buy-button")) {
+      setTimeout(() => {
+        setStripeLoaded(true);
+      }, 0);
+    }
+  }, []);
+ 
   // Initialize Cal.com Embed script
   useEffect(() => {
     (function (C: any, A: string, L: string) {
@@ -124,7 +134,7 @@ export function TarotOptions() {
           p(cal, ar);
         };
     })(window as any, "https://app.cal.com/embed/embed.js", "init");
-
+ 
     const Cal = (window as any).Cal;
     if (Cal) {
       Cal("init", "live-tarot-reading", { origin: "https://app.cal.com" });
@@ -136,17 +146,18 @@ export function TarotOptions() {
       });
     }
   }, []);
-
+ 
   // Shadow DOM styling to ensure Stripe Buy Buttons are stretched correctly once initialized.
   useEffect(() => {
-    // Style the custom component's Shadow DOM iframe once it renders
+    if (!stripeLoaded) return;
+ 
     const styleIframe = (btnId: string) => {
       const btn = document.getElementById(btnId);
       if (btn && btn.shadowRoot) {
         const iframe = btn.shadowRoot.querySelector("iframe");
         if (iframe) {
           if (iframe.getAttribute("data-styled") === "true") return true;
-
+ 
           const styleEl = document.createElement("style");
           styleEl.textContent = `
             iframe {
@@ -171,7 +182,7 @@ export function TarotOptions() {
       }
       return false;
     };
-
+ 
     const interval = setInterval(() => {
       const ids = ["stripe-btn-single", "stripe-btn-fourCard", "stripe-btn-video"];
       const allDone = ids.every(id => styleIframe(id));
@@ -179,19 +190,17 @@ export function TarotOptions() {
         clearInterval(interval);
       }
     }, 100);
-
+ 
     const timeout = setTimeout(() => {
       clearInterval(interval);
     }, 8000);
-
+ 
     return () => {
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, []);
-
-
-
+  }, [stripeLoaded]);
+ 
   const getMailtoLink = (offering: typeof offerings[0]) => {
     const subject = encodeURIComponent(`Request: ${offering.title} - Yogi Manu`);
     const body = encodeURIComponent(
@@ -199,12 +208,19 @@ export function TarotOptions() {
     );
     return `mailto:contact@yogimanu.com?subject=${subject}&body=${body}`;
   };
-
+ 
+  const defaultPublishableKey = "pk_live_51NgzQEIdvpDSvxu1Zb1Jk1a1WdIpcoUAQLcCFhMwzT8CkooM6HbhFvrjwDz588nUdaU6ejJCfwjpchR2RpTPgdfY00nmvldEA7";
+  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || defaultPublishableKey;
+ 
   return (
     <section className="bg-[#FCFAF7] py-16 md:py-36 border-t border-[#E8E1D7]">
-      <Script src="https://js.stripe.com/v3/buy-button.js" async />
+      <Script 
+        src="https://js.stripe.com/v3/buy-button.js" 
+        onLoad={() => setStripeLoaded(true)}
+        async 
+      />
       <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
-
+ 
         {/* Section Header */}
         <FadeIn>
           <div className="text-center mb-20 md:mb-28">
@@ -219,7 +235,7 @@ export function TarotOptions() {
             </p>
           </div>
         </FadeIn>
-
+ 
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-[1280px] mx-auto items-stretch">
           {offerings.map((offering, i) => (
@@ -253,7 +269,7 @@ export function TarotOptions() {
                     {offering.badge}
                   </span>
                 )}
-
+ 
                 {/* Card Title & Price Header */}
                 <div className="border-b border-[#E8E1D7]/20 pb-6 mb-8 text-center">
                   <h3 className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#D79B42] mb-3 font-semibold">
@@ -268,7 +284,7 @@ export function TarotOptions() {
                     {offering.duration}
                   </p>
                 </div>
-
+ 
                 {/* Package description */}
                 <div className="flex-1 flex flex-col gap-6">
                   <div className="space-y-3">
@@ -282,7 +298,7 @@ export function TarotOptions() {
                       {offering.description}
                     </p>
                   </div>
-
+ 
                   {/* Features list */}
                   <div className="pt-4 border-t border-[#E8E1D7]/10">
                     <ul className="space-y-3" role="list">
@@ -301,7 +317,7 @@ export function TarotOptions() {
                     </ul>
                   </div>
                 </div>
-
+ 
                 {/* Booking Button (Triggers Cal.com modal for Live Session, Stripe checkouts for Single Card Pull and Four Card Spread, mailto link for others) */}
                 <div className="pt-10">
                   {offering.id === "live" ? (
@@ -325,43 +341,53 @@ export function TarotOptions() {
                     <div className="relative group/btn w-full min-h-[48px] rounded-2xl overflow-hidden cursor-pointer">
                       {/* Stripe Buy Button placed BEHIND with opacity 1 to bypass clickjacking protection */}
                       <div className="absolute inset-0 z-0">
-                        {offering.id === "single" && (
-                          <stripe-buy-button
-                            id="stripe-btn-single"
-                            buy-button-id="buy_btn_1U4kUwIdvpDSvxu1H24nu5ik"
-                            publishable-key="pk_live_51NgzQEIdvpDSvxu1Zb1Jk1a1WdIpcoUAQLcCFhMwzT8CkooM6HbhFvrjwDz588nUdaU6ejJCfwjpchR2RpTPgdfY00nmvldEA7"
-                            style={{ width: "100%", height: "100%", display: "block" }}
-                          />
-                        )}
-                        {offering.id === "fourCard" && (
-                          <stripe-buy-button
-                            id="stripe-btn-fourCard"
-                            buy-button-id="buy_btn_1U5BeOIdvpDSvxu1ktSo4Y8x"
-                            publishable-key="pk_live_51NgzQEIdvpDSvxu1Zb1Jk1a1WdIpcoUAQLcCFhMwzT8CkooM6HbhFvrjwDz588nUdaU6ejJCfwjpchR2RpTPgdfY00nmvldEA7"
-                            style={{ width: "100%", height: "100%", display: "block" }}
-                          />
-                        )}
-                        {offering.id === "video" && (
-                          <stripe-buy-button
-                            id="stripe-btn-video"
-                            buy-button-id="buy_btn_1U5BfJIdvpDSvxu1RNEI0DBH"
-                            publishable-key="pk_live_51NgzQEIdvpDSvxu1Zb1Jk1a1WdIpcoUAQLcCFhMwzT8CkooM6HbhFvrjwDz588nUdaU6ejJCfwjpchR2RpTPgdfY00nmvldEA7"
-                            style={{ width: "100%", height: "100%", display: "block" }}
-                          />
+                        {stripeLoaded ? (
+                          <>
+                            {offering.id === "single" && (
+                              <stripe-buy-button
+                                id="stripe-btn-single"
+                                buy-button-id="buy_btn_1U4kUwIdvpDSvxu1H24nu5ik"
+                                publishable-key={publishableKey}
+                                style={{ width: "100%", height: "100%", display: "block" }}
+                              />
+                            )}
+                            {offering.id === "fourCard" && (
+                              <stripe-buy-button
+                                id="stripe-btn-fourCard"
+                                buy-button-id="buy_btn_1U5BeOIdvpDSvxu1ktSo4Y8x"
+                                publishable-key={publishableKey}
+                                style={{ width: "100%", height: "100%", display: "block" }}
+                              />
+                            )}
+                            {offering.id === "video" && (
+                              <stripe-buy-button
+                                id="stripe-btn-video"
+                                buy-button-id="buy_btn_1U5BfJIdvpDSvxu1RNEI0DBH"
+                                publishable-key={publishableKey}
+                                style={{ width: "100%", height: "100%", display: "block" }}
+                              />
+                            )}
+                          </>
+                        ) : (
+                          <div className="w-full h-full bg-[#262626] flex items-center justify-center text-[10px] text-white/50 uppercase tracking-widest animate-pulse">
+                            Loading...
+                          </div>
                         )}
                       </div>
-
+ 
                       {/* Our custom-styled button ON TOP with pointer-events-none */}
                       <div
+                        aria-hidden="true"
                         className={[
                           "absolute inset-0 z-10 flex items-center justify-center w-full min-h-[48px] py-3.5 px-4 rounded-2xl font-sans text-xs tracking-wider uppercase font-semibold transition-all duration-300 text-center pointer-events-none",
                           "group-hover/btn:scale-[1.02] group-active/btn:scale-[0.98]",
+                          !stripeLoaded ? "opacity-40" : "",
                           offering.featured
                             ? "bg-[#D79B42] text-[#1a1208] group-hover/btn:bg-[#c08a38] group-hover/btn:shadow-[0_8px_24px_rgba(215,155,66,0.35)]"
                             : "bg-[#262626] text-[#FCFAF7] group-hover/btn:bg-[#D79B42] group-hover/btn:text-[#1a1208] group-hover/btn:shadow-[0_8px_24px_rgba(38,38,38,0.15)]",
                         ].join(" ")}
                       >
-                        {offering.cta}
+                        {stripeLoaded ? offering.cta : "Loading..."}
                       </div>
                     </div>
                   ) : (
@@ -381,12 +407,12 @@ export function TarotOptions() {
                     </motion.a>
                   )}
                 </div>
-
+ 
               </motion.div>
             </FadeIn>
           ))}
         </div>
-
+ 
         {/* Legal Disclaimer */}
         <FadeIn delay={0.2}>
           <div className="mt-16 md:mt-24 pt-8 border-t border-[#E8E1D7] text-center max-w-[720px] mx-auto">
@@ -395,9 +421,8 @@ export function TarotOptions() {
             </p>
           </div>
         </FadeIn>
-
+ 
       </div>
     </section>
   );
 }
-

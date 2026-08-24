@@ -20,6 +20,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://yogimanu.com"),
   title: "Yogi Manu | Yoga, Kirtan & Spiritual Teachings",
   description:
     "Discover yoga, kirtan, meditation and spiritual teachings rooted in lived experience, devotion and daily practice.",

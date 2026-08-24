@@ -38,8 +38,8 @@ export function MaharajJiSection() {
 
                 {/* Image 3 */}
                 <div className="relative aspect-[3/4] rounded-[24px] overflow-hidden bg-[#F8F5EF] border border-[#E8E1D7] group shadow-sm hover:shadow-md transition-all duration-500">
-                  <Image
-                    src="/images/photo1.jpg"
+                   <Image
+                    src="/images/Maharajji-38.png"
                     alt="Neem Karoli Baba"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

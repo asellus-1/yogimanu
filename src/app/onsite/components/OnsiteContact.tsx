@@ -1,19 +1,12 @@
 "use client";
-
+ 
 import { FadeIn } from "@/components/shared/FadeIn";
-import { useState } from "react";
-
+import { useActionState } from "react";
+import { submitOnsiteInquiry } from "@/app/actions";
+ 
 export function OnsiteContact() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("submitting");
-    setTimeout(() => {
-      setStatus("success");
-    }, 1500);
-  };
-
+  const [state, formAction, isPending] = useActionState(submitOnsiteInquiry, null);
+ 
   return (
     <section id="property-inquiry" className="bg-[#F8F5EF] py-16 md:py-36 border-t border-[#E8E1D7]">
       <div className="max-w-[760px] mx-auto px-6">
@@ -32,9 +25,9 @@ export function OnsiteContact() {
             </p>
           </div>
         </FadeIn>
-
+ 
         <FadeIn delay={0.1}>
-          {status === "success" ? (
+          {state?.success ? (
             <div className="text-center p-12 bg-[#FCFAF7] border border-[#E8E1D7] rounded-3xl shadow-sm">
               <p className="font-serif text-2xl text-[#262626] mb-3">Thank you.</p>
               <p className="font-sans text-sm text-[#6D6D6D]">
@@ -42,8 +35,14 @@ export function OnsiteContact() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8 bg-[#FCFAF7]/40 border border-[#E8E1D7] rounded-3xl p-5 md:p-12 shadow-sm">
+            <form action={formAction} className="space-y-8 bg-[#FCFAF7]/40 border border-[#E8E1D7] rounded-3xl p-5 md:p-12 shadow-sm">
               
+              {state?.error && (
+                <div className="p-4 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100 font-sans">
+                  {state.error}
+                </div>
+              )}
+ 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label htmlFor="name" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D] font-medium">
@@ -52,8 +51,9 @@ export function OnsiteContact() {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
-                    disabled={status === "submitting"}
+                    disabled={isPending}
                     className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#5E7052] transition-colors duration-300 disabled:opacity-50"
                   />
                 </div>
@@ -65,13 +65,14 @@ export function OnsiteContact() {
                   <input
                     type="text"
                     id="property"
+                    name="property"
                     required
-                    disabled={status === "submitting"}
+                    disabled={isPending}
                     className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#5E7052] transition-colors duration-300 disabled:opacity-50"
                   />
                 </div>
               </div>
-
+ 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label htmlFor="email" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D] font-medium">
@@ -80,12 +81,13 @@ export function OnsiteContact() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
-                    disabled={status === "submitting"}
+                    disabled={isPending}
                     className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#5E7052] transition-colors duration-300 disabled:opacity-50"
                   />
                 </div>
-
+ 
                 <div className="space-y-2">
                   <label htmlFor="propertyType" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D] font-medium">
                     Property Type
@@ -93,9 +95,10 @@ export function OnsiteContact() {
                   <div className="relative">
                     <select
                       id="propertyType"
+                      name="propertyType"
                       required
                       defaultValue=""
-                      disabled={status === "submitting"}
+                      disabled={isPending}
                       className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#6D6D6D] font-sans text-base focus:outline-none focus:border-[#5E7052] transition-colors duration-300 disabled:opacity-50 appearance-none rounded-none cursor-pointer"
                     >
                       <option value="" disabled>Select property type...</option>
@@ -112,35 +115,36 @@ export function OnsiteContact() {
                   </div>
                 </div>
               </div>
-
+ 
               <div className="space-y-2">
                 <label htmlFor="message" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D] font-medium">
                   Inquiry Details
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   required
                   rows={4}
                   placeholder="Tell us about your property, space availability, estimated class frequencies, or any questions..."
-                  disabled={status === "submitting"}
+                  disabled={isPending}
                   className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base placeholder-[#6D6D6D]/45 resize-none focus:outline-none focus:border-[#5E7052] transition-colors duration-300 disabled:opacity-50"
                 ></textarea>
               </div>
-
+ 
               <div className="pt-4 flex justify-center">
                 <button
                   type="submit"
-                  disabled={status === "submitting"}
-                  className="inline-flex items-center justify-center min-h-[48px] px-8 font-sans text-xs tracking-wider uppercase font-semibold bg-[#262626] text-[#FCFAF7] rounded-2xl hover:bg-[#5E7052] transition-colors duration-500 disabled:opacity-50 cursor-pointer"
+                  disabled={isPending}
+                  className="inline-flex items-center justify-center min-h-[48px] px-8 font-sans text-xs tracking-wider uppercase font-semibold bg-[#262626] text-[#FCFAF7] rounded-2xl hover:bg-[#5E7052] transition-colors duration-500 disabled:opacity-50 cursor-pointer text-center"
                 >
-                  {status === "submitting" ? "Sending Inquiry..." : "Submit Inquiry"}
+                  {isPending ? "Sending Inquiry..." : "Submit Inquiry"}
                 </button>
               </div>
-
+ 
             </form>
           )}
         </FadeIn>
-
+ 
       </div>
     </section>
   );

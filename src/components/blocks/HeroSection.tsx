@@ -20,7 +20,7 @@ export function HeroSection() {
         {/* Mobile image – shown only on small screens */}
         <Image
           src="/images/photo1.jpg"
-          alt="Neem Karoli Baba"
+          alt="Yogi Manu"
           fill
           priority
           className="object-cover object-center md:hidden"
@@ -29,7 +29,7 @@ export function HeroSection() {
         {/* Desktop image – hidden on mobile */}
         <Image
           src="/images/photo1.jpg"
-          alt="Neem Karoli Baba"
+          alt="Yogi Manu"
           fill
           priority
           className="object-cover object-center hidden md:block"

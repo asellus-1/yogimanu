@@ -1,76 +1,75 @@
 "use client";
-
+ 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
-
+ 
 export function SoundToggle({ className }: { className?: string }) {
   const [enabled, setEnabled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
+  const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
+ 
   // Hydration guard
   useEffect(() => {
-    setMounted(true);
+    setTimeout(() => {
+      setMounted(true);
+    }, 0);
+  }, []);
+ 
+  // Audio setup after mounting
+  useEffect(() => {
+    if (!mounted) return;
+ 
     const audio = new Audio("/kirtan.mp3");
     audio.loop = true;
     audio.volume = 0;
     audioRef.current = audio;
-
+    const currentInterval = fadeIntervalRef;
+ 
     const playAttempt = () => {
       audio.play().then(() => {
-        fadeVolume(audio, 0, 0.45, 2000);
+        fadeVolume(audio, 0, 0.45, 2000, fadeIntervalRef);
         setEnabled(true);
-      }).catch(() => {
-        // Fallback for browser autoplay block: play on first click, touch, or keydown
-        const startOnInteract = () => {
-          audio.play().then(() => {
-            fadeVolume(audio, 0, 0.45, 2000);
-            setEnabled(true);
-            cleanup();
-          }).catch((err) => console.log("Play on interact failed:", err));
-        };
-        const cleanup = () => {
-          window.removeEventListener("click", startOnInteract);
-          window.removeEventListener("touchstart", startOnInteract);
-          window.removeEventListener("keydown", startOnInteract);
-        };
-        window.addEventListener("click", startOnInteract);
-        window.addEventListener("touchstart", startOnInteract);
-        window.addEventListener("keydown", startOnInteract);
+      }).catch((err) => {
+        // Autoplay blocked by browser. Fail silently and wait for user to click button.
+        console.log("Autoplay blocked, waiting for user interaction:", err);
       });
     };
-
+ 
     const timeoutId = setTimeout(playAttempt, 500);
-
+ 
     return () => {
       clearTimeout(timeoutId);
+      if (currentInterval.current) {
+        clearInterval(currentInterval.current);
+      }
       audio.pause();
       audio.src = "";
     };
-  }, []);
-
+  }, [mounted]);
+ 
   const handleToggle = () => {
     const audio = audioRef.current;
     if (!audio) return;
-
+ 
     if (!enabled) {
       // Fade in
       audio.play().catch(() => { });
-      fadeVolume(audio, 0, 0.45, 2000);
+      fadeVolume(audio, audio.volume, 0.45, 2000, fadeIntervalRef);
       setEnabled(true);
     } else {
       // Fade out then pause
-      fadeVolume(audio, audio.volume, 0, 800, () => {
+      fadeVolume(audio, audio.volume, 0, 800, fadeIntervalRef, () => {
         audio.pause();
         audio.currentTime = 0;
       });
       setEnabled(false);
     }
   };
-
+ 
   if (!mounted) return null;
-
+ 
   return (
     <motion.div
       className={className || "absolute top-6 right-6 md:top-8 md:right-12 z-20"}
@@ -87,7 +86,7 @@ export function SoundToggle({ className }: { className?: string }) {
             <PulseRing delay={1.8} />
           </>
         )}
-
+ 
         {/* Button */}
         <button
           id="sound-toggle"
@@ -134,7 +133,7 @@ export function SoundToggle({ className }: { className?: string }) {
     </motion.div>
   );
 }
-
+ 
 /* Animated ripple ring */
 function PulseRing({ delay }: { delay: number }) {
   return (
@@ -155,27 +154,35 @@ function PulseRing({ delay }: { delay: number }) {
     />
   );
 }
-
-/* Utility: linear volume ramp */
+ 
+/* Utility: linear volume ramp with active fade tracking to avoid race conditions */
 function fadeVolume(
   audio: HTMLAudioElement,
   from: number,
   to: number,
   durationMs: number,
+  intervalRef: React.MutableRefObject<NodeJS.Timeout | null>,
   onComplete?: () => void
 ) {
+  if (intervalRef.current) {
+    clearInterval(intervalRef.current);
+  }
+ 
   const steps = 30;
   const stepMs = durationMs / steps;
   const delta = (to - from) / steps;
   let current = from;
   let step = 0;
-
-  const id = setInterval(() => {
+ 
+  intervalRef.current = setInterval(() => {
     step++;
     current = Math.min(1, Math.max(0, current + delta));
     audio.volume = current;
     if (step >= steps) {
-      clearInterval(id);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
       onComplete?.();
     }
   }, stepMs);

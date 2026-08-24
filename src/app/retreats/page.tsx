@@ -1,26 +1,19 @@
 "use client";
-
-import { useState } from "react";
+ 
+import { useActionState } from "react";
 import { FadeIn } from "@/components/shared/FadeIn";
-
+import { submitRetreatInquiry } from "@/app/actions";
+ 
 export default function RetreatsPage() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("submitting");
-    setTimeout(() => {
-      setStatus("success");
-    }, 1500);
-  };
-
+  const [state, formAction, isPending] = useActionState(submitRetreatInquiry, null);
+ 
   return (
     <main className="bg-[#FCFAF7] min-h-screen">
       {/* Hero Header */}
       <section className="relative flex items-center justify-center overflow-hidden pt-32 pb-16 border-b border-[#E8E1D7]">
         {/* Decorative center line */}
         <div className="absolute top-0 bottom-0 left-1/2 w-px bg-[#E8E1D7] -translate-x-1/2" aria-hidden="true" />
-
+ 
         <div className="relative z-10 max-w-[760px] mx-auto px-6 text-center">
           <FadeIn>
             <span className="block font-sans text-[10px] tracking-[0.25em] uppercase text-[#D79B42] mb-6">
@@ -35,12 +28,12 @@ export default function RetreatsPage() {
           </FadeIn>
         </div>
       </section>
-
+ 
       {/* Form Section */}
       <section className="py-12 md:py-28">
         <div className="max-w-[760px] mx-auto px-6">
           <FadeIn delay={0.1}>
-            {status === "success" ? (
+            {state?.success ? (
               <div className="text-center p-12 bg-[#F8F5EF] border border-[#E8E1D7] rounded-2xl">
                 <p className="font-serif text-2xl text-[#262626] mb-3">Thank you.</p>
                 <p className="font-sans text-sm text-[#6D6D6D]">
@@ -48,7 +41,14 @@ export default function RetreatsPage() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8 bg-[#F8F5EF]/40 border border-[#E8E1D7] rounded-3xl p-5 md:p-12 shadow-sm">
+              <form action={formAction} className="space-y-8 bg-[#F8F5EF]/40 border border-[#E8E1D7] rounded-3xl p-5 md:p-12 shadow-sm">
+                
+                {state?.error && (
+                  <div className="p-4 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100 font-sans">
+                    {state.error}
+                  </div>
+                )}
+ 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <label htmlFor="name" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D]">
@@ -57,8 +57,9 @@ export default function RetreatsPage() {
                     <input
                       type="text"
                       id="name"
+                      name="name"
                       required
-                      disabled={status === "submitting"}
+                      disabled={isPending}
                       className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50"
                     />
                   </div>
@@ -69,13 +70,14 @@ export default function RetreatsPage() {
                     <input
                       type="text"
                       id="organization"
+                      name="organization"
                       required
-                      disabled={status === "submitting"}
+                      disabled={isPending}
                       className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50"
                     />
                   </div>
                 </div>
-
+ 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <label htmlFor="email" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D]">
@@ -84,8 +86,9 @@ export default function RetreatsPage() {
                     <input
                       type="email"
                       id="email"
+                      name="email"
                       required
-                      disabled={status === "submitting"}
+                      disabled={isPending}
                       className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50"
                     />
                   </div>
@@ -96,10 +99,11 @@ export default function RetreatsPage() {
                     <div className="relative">
                       <select
                         id="eventType"
+                        name="eventType"
                         required
                         defaultValue=""
-                        disabled={status === "submitting"}
-                        className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50 appearance-none rounded-none"
+                        disabled={isPending}
+                        className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50 appearance-none rounded-none cursor-pointer"
                       >
                         <option value="" disabled>Select an event type...</option>
                         <option value="retreat">Retreat</option>
@@ -116,7 +120,7 @@ export default function RetreatsPage() {
                     </div>
                   </div>
                 </div>
-
+ 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <label htmlFor="location" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D]">
@@ -125,8 +129,9 @@ export default function RetreatsPage() {
                     <input
                       type="text"
                       id="location"
+                      name="location"
                       required
-                      disabled={status === "submitting"}
+                      disabled={isPending}
                       className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50"
                     />
                   </div>
@@ -137,14 +142,15 @@ export default function RetreatsPage() {
                     <input
                       type="text"
                       id="dates"
+                      name="dates"
                       required
-                      disabled={status === "submitting"}
+                      disabled={isPending}
                       placeholder="e.g. Fall 2026 or Oct 12-14"
                       className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50 placeholder-[#6D6D6D]/45"
                     />
                   </div>
                 </div>
-
+ 
                 <div className="space-y-2">
                   <label htmlFor="audienceSize" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D]">
                     Expected Audience Size
@@ -152,38 +158,40 @@ export default function RetreatsPage() {
                   <input
                     type="text"
                     id="audienceSize"
+                    name="audienceSize"
                     required
-                    disabled={status === "submitting"}
+                    disabled={isPending}
                     className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50"
                   />
                 </div>
-
+ 
                 <div className="space-y-2">
                   <label htmlFor="message" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D]">
                     Message / Event Details
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     required
                     rows={4}
-                    disabled={status === "submitting"}
+                    disabled={isPending}
                     className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base resize-none focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50"
                   ></textarea>
                 </div>
-
+ 
                 <div className="pt-2 text-center">
                   <p className="font-sans text-xs text-[#6D6D6D] tracking-wide bg-[#F8F5EF] inline-block px-4 py-2 border border-[#E8E1D7] rounded-md">
                     Currently accepting retreat and event bookings worldwide.
                   </p>
                 </div>
-
+ 
                 <div className="pt-4 flex justify-center">
                   <button
                     type="submit"
-                    disabled={status === "submitting"}
-                    className="inline-flex items-center justify-center min-h-[48px] px-8 font-sans text-xs tracking-wider uppercase font-semibold bg-[#262626] text-[#FCFAF7] rounded-2xl hover:bg-[#D79B42] hover:text-[#1a1208] transition-colors duration-500 disabled:opacity-50 disabled:hover:bg-[#262626]"
+                    disabled={isPending}
+                    className="inline-flex items-center justify-center min-h-[48px] px-8 font-sans text-xs tracking-wider uppercase font-semibold bg-[#262626] text-[#FCFAF7] rounded-2xl hover:bg-[#D79B42] hover:text-[#1a1208] transition-colors duration-500 disabled:opacity-50 disabled:hover:bg-[#262626] cursor-pointer"
                   >
-                    {status === "submitting" ? "Sending..." : "Submit Inquiry"}
+                    {isPending ? "Sending..." : "Submit Inquiry"}
                   </button>
                 </div>
               </form>
