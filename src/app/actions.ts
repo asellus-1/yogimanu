@@ -1,34 +1,40 @@
 "use server";
- 
+
+import { appendToGoogleSheet } from "@/lib/googleSheets";
+
 export interface FormResponse {
   success: boolean;
   error?: string;
 }
- 
+
 function validateEmail(email: string): boolean {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
 }
- 
+
 export async function submitOnsiteInquiry(prevState: unknown, formData: FormData): Promise<FormResponse> {
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
- 
+
   const name = formData.get("name")?.toString().trim();
   const property = formData.get("property")?.toString().trim();
   const email = formData.get("email")?.toString().trim();
   const propertyType = formData.get("propertyType")?.toString().trim();
   const message = formData.get("message")?.toString().trim();
- 
+
   // Server-side validation
   if (!name || !property || !email || !propertyType || !message) {
     return { success: false, error: "All fields are required." };
   }
- 
+
+  if (name.length > 100 || property.length > 200 || email.length > 254 || propertyType.length > 50 || message.length > 5000) {
+    return { success: false, error: "Input exceeds maximum allowed length." };
+  }
+
   if (!validateEmail(email)) {
     return { success: false, error: "Please enter a valid email address." };
   }
- 
+
   // Log inquiry details on the server console (stdout) to ensure they are captured.
   console.log("==========================================");
   console.log("NEW ONSITE PARTNERSHIP INQUIRY RECEIVED:");
@@ -39,14 +45,23 @@ export async function submitOnsiteInquiry(prevState: unknown, formData: FormData
   console.log(`Property Type: ${propertyType}`);
   console.log(`Details:       ${message}`);
   console.log("==========================================");
- 
+
+  // Append to Google Sheet if configured
+  await appendToGoogleSheet("onsite", {
+    name,
+    property,
+    email,
+    propertyType,
+    message,
+  });
+
   return { success: true };
 }
- 
+
 export async function submitRetreatInquiry(prevState: unknown, formData: FormData): Promise<FormResponse> {
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
- 
+
   const name = formData.get("name")?.toString().trim();
   const organization = formData.get("organization")?.toString().trim();
   const email = formData.get("email")?.toString().trim();
@@ -55,16 +70,29 @@ export async function submitRetreatInquiry(prevState: unknown, formData: FormDat
   const dates = formData.get("dates")?.toString().trim();
   const audienceSize = formData.get("audienceSize")?.toString().trim();
   const message = formData.get("message")?.toString().trim();
- 
+
   // Server-side validation
   if (!name || !organization || !email || !eventType || !location || !dates || !audienceSize || !message) {
     return { success: false, error: "All fields are required." };
   }
- 
+
+  if (
+    name.length > 100 ||
+    organization.length > 200 ||
+    email.length > 254 ||
+    eventType.length > 50 ||
+    location.length > 200 ||
+    dates.length > 100 ||
+    audienceSize.length > 100 ||
+    message.length > 5000
+  ) {
+    return { success: false, error: "Input exceeds maximum allowed length." };
+  }
+
   if (!validateEmail(email)) {
     return { success: false, error: "Please enter a valid email address." };
   }
- 
+
   // Log inquiry details on the server console (stdout) to ensure they are captured.
   console.log("==========================================");
   console.log("NEW RETREAT COLLABORATION INQUIRY RECEIVED:");
@@ -78,6 +106,58 @@ export async function submitRetreatInquiry(prevState: unknown, formData: FormDat
   console.log(`Audience Size: ${audienceSize}`);
   console.log(`Details:       ${message}`);
   console.log("==========================================");
- 
+
+  // Append to Google Sheet if configured
+  await appendToGoogleSheet("retreat", {
+    name,
+    organization,
+    email,
+    eventType,
+    location,
+    dates,
+    audienceSize,
+    message,
+  });
+
+  return { success: true };
+}
+
+export async function submitContactInquiry(prevState: unknown, formData: FormData): Promise<FormResponse> {
+  // Simulate network delay
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const name = formData.get("name")?.toString().trim();
+  const email = formData.get("email")?.toString().trim();
+  const message = formData.get("message")?.toString().trim();
+
+  // Server-side validation
+  if (!name || !email || !message) {
+    return { success: false, error: "All fields are required." };
+  }
+
+  if (name.length > 100 || email.length > 254 || message.length > 5000) {
+    return { success: false, error: "Input exceeds maximum allowed length." };
+  }
+
+  if (!validateEmail(email)) {
+    return { success: false, error: "Please enter a valid email address." };
+  }
+
+  // Log inquiry details on the server console (stdout) to ensure they are captured.
+  console.log("==========================================");
+  console.log("NEW GENERAL CONTACT INQUIRY RECEIVED:");
+  console.log("------------------------------------------");
+  console.log(`Name:          ${name}`);
+  console.log(`Email:         ${email}`);
+  console.log(`Message:       ${message}`);
+  console.log("==========================================");
+
+  // Append to Google Sheet if configured
+  await appendToGoogleSheet("contact", {
+    name,
+    email,
+    message,
+  });
+
   return { success: true };
 }

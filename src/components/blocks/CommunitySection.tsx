@@ -49,7 +49,7 @@ export function CommunitySection() {
                   { label: "Follow on Instagram", href: "https://www.instagram.com/yogimanuawakens", external: true },
                   { label: "Join the newsletter", href: "#support", external: false },
                   { label: "Host Manu for a Retreat", href: "#bookings", external: false },
-                  { label: "Support the journey", href: "/tarot", external: false, isRoute: true },
+                  { label: "Support the journey", href: "https://donate.stripe.com/00w14naBE6qd97b9mB18c00", external: true, isRoute: false },
                 ].map(({ label, href, external, isRoute }) => (
                   <li key={label}>
                     {external ? (

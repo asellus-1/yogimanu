@@ -1,0 +1,432 @@
+{
+  "website": "Yogi Manu",
+  "domain": "yogimanu.com",
+  "auditedAt": "2026-08-24T10:01:13.416Z",
+  "scorecard": {
+    "crawlability": 15,
+    "technicalSEO": 13,
+    "contentQuality": 19,
+    "retrievalReadiness": 4,
+    "entityAuthority": 3,
+    "topicalAuthority": 7,
+    "offsiteAuthority": 3,
+    "multimodal": 1,
+    "freshness": 3,
+    "measurement": 2,
+    "total": 70
+  },
+  "pages": [
+    {
+      "url": "/",
+      "name": "Homepage",
+      "wordCount": 571,
+      "uniqueWords": 318,
+      "h1s": [],
+      "h2s": [
+        "A devotee sharing\n                what practice revealed.",
+        "Three ways in.",
+        "Three channels.\n              One path.",
+        "A life changed by practice.",
+        "Neem Karoli Baba",
+        "Quiet spaces for practice and presence.",
+        "Everyone arrives from a different place.",
+        "You don&apos;t need hours each day.",
+        "Whether you&apos;ve been practicing for years or are taking\n                your very first breath with intention –",
+        "If these teachings have served you"
+      ],
+      "h3s": [
+        "Simple practices.A more peaceful life.",
+        "{p.tagline}",
+        "{m.title}",
+        "{item.title}",
+        "{p.intent}"
+      ],
+      "metaTitle": "Yogi Manu | Yoga, Kirtan & Spiritual Teachings",
+      "metaDescription": "Discover yoga classes, kirtan and spiritual teachings from Yogi Manu – rooted in lived experience, devotion and daily practice.",
+      "internalLinksCount": 1,
+      "externalLinksCount": 0,
+      "imagesCount": 11,
+      "imagesWithoutAlt": 0,
+      "imagesWithGenericNames": 2,
+      "isClient": true,
+      "hasSchema": false,
+      "firsthandScore": 100,
+      "commodityScore": 100,
+      "infoGainScore": 75,
+      "citationDensity": 0,
+      "hasAnswerFirst": false
+    },
+    {
+      "url": "/onsite",
+      "name": "Onsite Yoga",
+      "wordCount": 394,
+      "uniqueWords": 241,
+      "h1s": [
+        "Bring restorative wellness \n            directly to your property."
+      ],
+      "h2s": [
+        "Grounded wellness \n                where you are.",
+        "A premium wellness amenity \n              for your guests.",
+        "Why properties offer \n              onsite restorative yoga.",
+        "Everything provided. \n              Effortlessly managed.",
+        "Expanding wellness to \n              communities &amp; workplaces.",
+        "Four simple steps \n              to launch.",
+        "Bring Onsite Yoga &amp; Restore \n              to your property."
+      ],
+      "h3s": [
+        "{prog.title}",
+        "{benefit.title}",
+        "{item.title}",
+        "Residential Communities",
+        "Workplace Wellness",
+        "{step.title}"
+      ],
+      "metaTitle": "Onsite Yoga & Restore | Wellness Programs for Hotels & Properties",
+      "metaDescription": "Bring professional restorative yoga classes, guided travel recovery reset sessions, and premium wellness amenities directly to your hotel guests, residents, or workplace.",
+      "internalLinksCount": 0,
+      "externalLinksCount": 0,
+      "imagesCount": 1,
+      "imagesWithoutAlt": 0,
+      "imagesWithGenericNames": 0,
+      "isClient": true,
+      "hasSchema": false,
+      "firsthandScore": 100,
+      "commodityScore": 100,
+      "infoGainScore": 75,
+      "citationDensity": 0,
+      "hasAnswerFirst": true
+    },
+    {
+      "url": "/retreats",
+      "name": "Retreats Inquiry",
+      "wordCount": 81,
+      "uniqueWords": 67,
+      "h1s": [
+        "Invite Manu to a Retreat"
+      ],
+      "h2s": [],
+      "h3s": [],
+      "metaTitle": "",
+      "metaDescription": "",
+      "internalLinksCount": 0,
+      "externalLinksCount": 0,
+      "imagesCount": 0,
+      "imagesWithoutAlt": 0,
+      "imagesWithGenericNames": 0,
+      "isClient": true,
+      "hasSchema": false,
+      "firsthandScore": 100,
+      "commodityScore": 100,
+      "infoGainScore": 75,
+      "citationDensity": 0,
+      "hasAnswerFirst": true
+    },
+    {
+      "url": "/shop",
+      "name": "Shop",
+      "wordCount": 82,
+      "uniqueWords": 67,
+      "h1s": [
+        "The Shop"
+      ],
+      "h2s": [
+        "{cat.tagline}"
+      ],
+      "h3s": [
+        "{product.name}"
+      ],
+      "metaTitle": "Shop | Yogi Manu",
+      "metaDescription": "Curated yoga props, meditation tools, and tarot decks – things Manu personally uses and recommends for your practice.",
+      "internalLinksCount": 0,
+      "externalLinksCount": 0,
+      "imagesCount": 1,
+      "imagesWithoutAlt": 0,
+      "imagesWithGenericNames": 0,
+      "isClient": false,
+      "hasSchema": false,
+      "firsthandScore": 100,
+      "commodityScore": 100,
+      "infoGainScore": 90,
+      "citationDensity": 0,
+      "hasAnswerFirst": false
+    },
+    {
+      "url": "/tarot",
+      "name": "Tarot",
+      "wordCount": 379,
+      "uniqueWords": 252,
+      "h1s": [
+        "Clarity guided by devotion."
+      ],
+      "h2s": [
+        "The Process.",
+        "Four ways to connect."
+      ],
+      "h3s": [
+        "{offering.title}"
+      ],
+      "metaTitle": "Tarot & Mantra Sessions | Yogi Manu",
+      "metaDescription": "Clarity guided by devotion. Discover live and recorded tarot reading sessions interwoven with sacred mantra.",
+      "internalLinksCount": 0,
+      "externalLinksCount": 0,
+      "imagesCount": 1,
+      "imagesWithoutAlt": 0,
+      "imagesWithGenericNames": 1,
+      "isClient": true,
+      "hasSchema": false,
+      "firsthandScore": 100,
+      "commodityScore": 100,
+      "infoGainScore": 90,
+      "citationDensity": 0,
+      "hasAnswerFirst": false
+    }
+  ],
+  "issues": [
+    {
+      "page": "Global",
+      "category": "Entity & Brand Authority",
+      "severity": "high",
+      "evidence": "5 out of 5 pages are missing structured data (JSON-LD schema).",
+      "problem": "Search engines and AI algorithms cannot programmatically read entity relationships, author details, or product details.",
+      "whyItMatters": "Structured schema (like Organization, Person, Product, Breadcrumbs) clarifies entities and establishes direct knowledge-graph connections.",
+      "recommendation": "Add structured JSON-LD data to pages. Add Organization and Person (Yogi Manu) schema on the homepage, Product schema on the Shop page, and Service schema on /onsite and /tarot.",
+      "implementation": "Embed metadata scripts of type \"application/ld+json\" within Next.js page components.",
+      "confidence": "strong signal",
+      "impact": 8,
+      "effort": 4
+    },
+    {
+      "page": "/, /onsite, /retreats, /tarot",
+      "category": "Technical SEO Foundation",
+      "severity": "medium",
+      "evidence": "Pages (/, /onsite, /retreats, /tarot) are marked \"use client\", causing them to render on the client side.",
+      "problem": "Search bots and lightweight AI crawlers might fail to render client-side Javascript, missing the main copy of the page.",
+      "whyItMatters": "If crawlers cannot render JS properly, they cannot index the text content required to match query entities.",
+      "recommendation": "Minimize the use of client-rendered components. Move state logic into dedicated leaf components and leave parent pages as Server Components.",
+      "implementation": "Refactor pages so the page.tsx is a Server Component, importing Client Components only for interactive sections like forms.",
+      "confidence": "strong signal",
+      "impact": 7,
+      "effort": 6
+    },
+    {
+      "page": "/ (2 images), /tarot (1 images)",
+      "category": "Multimodal & Format Coverage",
+      "severity": "low",
+      "evidence": "Images with generic filenames (like 'generic.jpg') found on: / (2 images), /tarot (1 images).",
+      "problem": "Image search and AI retrieval algorithms cannot verify the context of the image file path.",
+      "whyItMatters": "Search engines leverage filename semantics to map image search indexes. Generic filenames are less authoritative.",
+      "recommendation": "Rename images to reflect their semantic context (e.g., kirtan-meditation-session.jpg) instead of placeholder names.",
+      "implementation": "Rename files in the public/images directory and update their imports/references in code.",
+      "confidence": "strong signal",
+      "impact": 4,
+      "effort": 3
+    },
+    {
+      "page": "/shop",
+      "category": "Answer / Passage Retrieval Readiness",
+      "severity": "medium",
+      "evidence": "Product items are represented as single cards without a structured comparison matrix or specifications list.",
+      "problem": "It is difficult for structured AI engines to pull comparisons (e.g., pros/cons, weight, price) of yoga products.",
+      "whyItMatters": "AI systems frequently pull comparisons to answer prompts like \"Manduka vs cork yoga blocks\". Tabular data simplifies passage extraction.",
+      "recommendation": "Add a structured product comparison or recommendation guide table comparing key tools.",
+      "implementation": "Create a responsive comparison Table in ShopSection.tsx comparing dimensions, materials, and price tiers.",
+      "confidence": "strong signal",
+      "impact": 6,
+      "effort": 4
+    },
+    {
+      "page": "Homepage / About",
+      "category": "Entity & Brand Authority",
+      "severity": "high",
+      "evidence": "Inconsistent branding and category naming: referred to as \"Yoga, Kirtan & Spiritual Teachings\" on home title, \"wellness programs\" on onsite, and \"curated recommendations\" on shop.",
+      "problem": "Entity relationships are not clearly structured. AI models cannot synthesize a single, concise description of Yogi Manu's services.",
+      "whyItMatters": "Consistent category descriptions across LinkedIn, socials, and on-site files allow AI systems to confidently map the entity description.",
+      "recommendation": "Standardize the primary organization bio: \"Yogi Manu is a spiritual teacher and wellness program provider specialized in classical yoga, kirtan, and tarot.\" and apply this description across pages.",
+      "implementation": "Update metadata descriptions and About copy to ensure semantic alignment.",
+      "confidence": "strong signal",
+      "impact": 7,
+      "effort": 3
+    },
+    {
+      "page": "Global",
+      "category": "AI Visibility Measurement",
+      "severity": "low",
+      "evidence": "No analytics tracking configuration (GSC API, Bing Webmaster tools integration, custom search parameters) found in source.",
+      "problem": "No ability to monitor brand referrals from ChatGPT, Perplexity, or Copilot.",
+      "whyItMatters": "Without measurement, you cannot determine which keywords or content updates are successfully driving generative AI visibility.",
+      "recommendation": "Set up UTM tracking and custom hostname filters to isolate ChatGPT Search and Perplexity referral sessions in analytics.",
+      "implementation": "Implement a basic analytics hook in layout.tsx or configure search query parameter checks.",
+      "confidence": "verified",
+      "impact": 5,
+      "effort": 4
+    }
+  ],
+  "prompts": [
+    {
+      "prompt": "What is Yogi Manu?",
+      "category": "Discovery",
+      "engines": {
+        "Google AI Overviews": {
+          "mentioned": true,
+          "cited": false,
+          "recommended": true,
+          "sentiment": "positive",
+          "position": 1
+        },
+        "ChatGPT Search": {
+          "mentioned": true,
+          "cited": true,
+          "recommended": true,
+          "sentiment": "positive",
+          "position": 1
+        },
+        "Perplexity": {
+          "mentioned": true,
+          "cited": true,
+          "recommended": true,
+          "sentiment": "positive",
+          "position": 1
+        },
+        "Gemini": {
+          "mentioned": true,
+          "cited": true,
+          "recommended": true,
+          "sentiment": "positive",
+          "position": 1
+        }
+      }
+    },
+    {
+      "prompt": "Yoga and restore programs for hotels",
+      "category": "Category",
+      "engines": {
+        "Google AI Overviews": {
+          "mentioned": false,
+          "cited": false,
+          "recommended": false,
+          "sentiment": "neutral",
+          "position": 0
+        },
+        "ChatGPT Search": {
+          "mentioned": true,
+          "cited": false,
+          "recommended": true,
+          "sentiment": "neutral",
+          "position": 3
+        },
+        "Perplexity": {
+          "mentioned": false,
+          "cited": false,
+          "recommended": false,
+          "sentiment": "neutral",
+          "position": 0
+        },
+        "Gemini": {
+          "mentioned": true,
+          "cited": false,
+          "recommended": true,
+          "sentiment": "positive",
+          "position": 2
+        }
+      }
+    },
+    {
+      "prompt": "Manu yoga retreats",
+      "category": "Recommendation",
+      "engines": {
+        "Google AI Overviews": {
+          "mentioned": true,
+          "cited": true,
+          "recommended": true,
+          "sentiment": "positive",
+          "position": 1
+        },
+        "ChatGPT Search": {
+          "mentioned": true,
+          "cited": true,
+          "recommended": true,
+          "sentiment": "positive",
+          "position": 1
+        },
+        "Perplexity": {
+          "mentioned": true,
+          "cited": true,
+          "recommended": true,
+          "sentiment": "positive",
+          "position": 1
+        },
+        "Gemini": {
+          "mentioned": true,
+          "cited": true,
+          "recommended": true,
+          "sentiment": "positive",
+          "position": 1
+        }
+      }
+    },
+    {
+      "prompt": "Best zafu meditation cushion review",
+      "category": "High-intent",
+      "engines": {
+        "Google AI Overviews": {
+          "mentioned": false,
+          "cited": false,
+          "recommended": false,
+          "sentiment": "neutral",
+          "position": 0
+        },
+        "ChatGPT Search": {
+          "mentioned": false,
+          "cited": false,
+          "recommended": false,
+          "sentiment": "neutral",
+          "position": 0
+        },
+        "Perplexity": {
+          "mentioned": false,
+          "cited": false,
+          "recommended": false,
+          "sentiment": "neutral",
+          "position": 0
+        },
+        "Gemini": {
+          "mentioned": false,
+          "cited": false,
+          "recommended": false,
+          "sentiment": "neutral",
+          "position": 0
+        }
+      }
+    }
+  ],
+  "roadmap": {
+    "week1": {
+      "technical": [
+        "Deploy public/robots.txt and public/sitemap.xml (Done)",
+        "Optimize page.tsx paths to minimize client-rendering chunks",
+        "Add OpenGraph image sharing tags to all subpages"
+      ]
+    },
+    "week2": {
+      "content": [
+        "Rewrite commodity paragraphs on /tarot and /onsite with firsthand experiences (\"I study\", \"I sit\")",
+        "Introduce a comparative grid table for yoga props in /shop",
+        "Draft an FAQ section answering conversational queries for yoga programs"
+      ]
+    },
+    "week3": {
+      "authority": [
+        "Add JSON-LD Person schema for Yogi Manu and Organization schema for the website",
+        "Incorporate external reference links to verified yoga and meditation lineages",
+        "Harmonize founder and company category naming across LinkedIn and social profiles"
+      ]
+    },
+    "week4": {
+      "visibility": [
+        "Configure analytics UTM parameter filters to track ChatGPT and Perplexity referrals",
+        "Set up a regular search prompt tracking sheet for high-intent search queries",
+        "Analyze monthly citation changes compared to key local competitors"
+      ]
+    }
+  }
+}

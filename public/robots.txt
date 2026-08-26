@@ -1,0 +1,25 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Specifically allow OAI-SearchBot to crawl for ChatGPT Search citations
+User-agent: OAI-SearchBot
+Allow: /
+
+# Specifically allow PerplexityBot to crawl for Perplexity citations
+User-agent: PerplexityBot
+Allow: /
+
+# Specifically allow Bingbot to crawl for Bing AI experiences
+User-agent: Bingbot
+Allow: /
+
+# Specifically allow Googlebot to crawl for Google AI Overviews and AI Mode
+User-agent: Googlebot
+Allow: /
+
+# Google-Extended is allowed to use data for Gemini training
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://yogimanu.com/sitemap.xml

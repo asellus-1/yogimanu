@@ -1,19 +1,11 @@
 "use client";
 
 import { FadeIn } from "@/components/shared/FadeIn";
-import { useState } from "react";
+import { useActionState } from "react";
+import { submitContactInquiry } from "@/app/actions";
 
 export function ContactSection() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("submitting");
-    // Simulate network request
-    setTimeout(() => {
-      setStatus("success");
-    }, 1500);
-  };
+  const [state, formAction, isPending] = useActionState(submitContactInquiry, null);
 
   return (
     <section id="contact" className="bg-[#FCFAF7] py-16 md:py-36 border-t border-[#E8E1D7]">
@@ -30,13 +22,18 @@ export function ContactSection() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          {status === "success" ? (
+          {state?.success ? (
             <div className="text-center p-12 bg-[#F8F5EF] border border-[#E8E1D7] rounded-lg">
               <p className="font-serif text-2xl text-[#262626] mb-3">Thank you.</p>
               <p className="font-sans text-sm text-[#6D6D6D]">Your message has been received peacefully.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form action={formAction} className="space-y-8">
+              {state?.error && (
+                <div className="p-4 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100 font-sans text-center">
+                  {state.error}
+                </div>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label htmlFor="name" className="block font-sans text-xs tracking-widest uppercase text-[#6D6D6D]">
@@ -45,8 +42,9 @@ export function ContactSection() {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
-                    disabled={status === "submitting"}
+                    disabled={isPending}
                     className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50"
                   />
                 </div>
@@ -57,8 +55,9 @@ export function ContactSection() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
-                    disabled={status === "submitting"}
+                    disabled={isPending}
                     className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50"
                   />
                 </div>
@@ -69,19 +68,20 @@ export function ContactSection() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   required
                   rows={4}
-                  disabled={status === "submitting"}
+                  disabled={isPending}
                   className="w-full bg-transparent border-b border-[#E8E1D7] py-3 text-[#262626] font-sans text-base resize-none focus:outline-none focus:border-[#D79B42] transition-colors duration-300 disabled:opacity-50"
                 ></textarea>
               </div>
               <div className="pt-4 flex justify-center">
                 <button
                   type="submit"
-                  disabled={status === "submitting"}
+                  disabled={isPending}
                   className="inline-flex items-center justify-center min-h-[48px] px-8 font-sans text-xs tracking-wider uppercase font-semibold bg-[#262626] text-[#FCFAF7] rounded-2xl hover:bg-[#D79B42] transition-colors duration-500 disabled:opacity-50 disabled:hover:bg-[#262626]"
                 >
-                  {status === "submitting" ? "Sending..." : "Send Message"}
+                  {isPending ? "Sending..." : "Send Message"}
                 </button>
               </div>
             </form>
