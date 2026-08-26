@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useContactModal } from "@/components/shared/ContactProvider";
 
 const footerLinks = [
   { href: "/#about", label: "About" },
@@ -15,6 +16,7 @@ const footerLinks = [
 export function Footer() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const { openContactModal } = useContactModal();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (isHome) {
@@ -81,13 +83,13 @@ export function Footer() {
             <p className="font-sans text-sm text-[#6D6D6D]">
               Receive occasional reflections and teachings from the path.
             </p>
-            <a
-              href="mailto:contact@yogimanu.com"
+            <button
+              onClick={openContactModal}
               id="footer-newsletter-link"
-              className="inline-block font-sans text-sm text-[#262626] border-b border-[#262626] pb-px hover:text-[#D79B42] hover:border-[#D79B42] transition-colors duration-300"
+              className="inline-block font-sans text-sm text-[#262626] border-b border-[#262626] pb-px hover:text-[#D79B42] hover:border-[#D79B42] transition-colors duration-300 cursor-pointer bg-transparent text-left"
             >
               Get in touch
-            </a>
+            </button>
           </div>
         </div>
 

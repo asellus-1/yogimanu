@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useContactModal } from "@/components/shared/ContactProvider";
 
 const navLinks = [
   { href: "/#channels", label: "Channels" },
@@ -23,6 +24,7 @@ function scrollToSection(id: string) {
 export function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { openContactModal } = useContactModal();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setMenuOpen(false);
@@ -81,6 +83,21 @@ export function Navigation() {
               </Link>
             </li>
           ))}
+          <li>
+            <button
+              onClick={openContactModal}
+              className={[
+                "font-sans text-[11px] tracking-[0.18em] uppercase cursor-pointer bg-transparent border-none",
+                "transition-colors duration-300 relative",
+                isHome ? "text-white/80 hover:text-white" : "text-[#6D6D6D] hover:text-[#262626]",
+                "after:absolute after:bottom-[-3px] after:left-0 after:w-0 after:h-[1px]",
+                "after:bg-[#D79B42] after:transition-[width] after:duration-300",
+                "hover:after:w-full",
+              ].join(" ")}
+            >
+              Contact
+            </button>
+          </li>
         </ul>
 
         {/* Mobile Toggle */}
@@ -120,6 +137,17 @@ export function Navigation() {
               </Link>
             </li>
           ))}
+          <li>
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                openContactModal();
+              }}
+              className="font-sans text-[11px] tracking-[0.18em] uppercase text-[#6D6D6D] hover:text-[#262626] transition-colors duration-300 cursor-pointer bg-transparent border-none text-left"
+            >
+              Contact
+            </button>
+          </li>
         </ul>
       </div>
     </header>
