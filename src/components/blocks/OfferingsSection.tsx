@@ -29,7 +29,7 @@ const offeringsList = [
     id: "onsite",
     title: "Onsite Yoga & Restore",
     description:
-      "Bring professional, restorative yoga instruction directly to your hotel, residential community, or workplace. We provide everything needed – including mats, setup, and cleaning – to help guests and residents reset.",
+      "Bring professional, restorative yoga instruction directly to your hotel, residential community, or workplace. We provide everything needed – including mats, setup, and cleaning – to help guests and residents Restore.",
     image: "/yoga.jpeg",
     cta: "Explore Program",
     href: "/onsite",
@@ -82,21 +82,21 @@ export function OfferingsSection() {
 
                 {/* Content Section */}
                 <div className="flex flex-col justify-between flex-1 p-6 md:p-8 bg-white">
-                   <div className="space-y-4">
-                     {/* Title */}
-                     <h3 className="font-serif text-3xl md:text-4xl font-light text-[#262626] leading-tight">
-                       {item.title}
-                     </h3>
- 
-                     {/* Description */}
-                     <p className="font-sans text-base text-[#6D6D6D] leading-relaxed">
-                       {item.description}
-                     </p>
-                   </div>
- 
-                   {/* Call to Action Button */}
-                   <div className="pt-6">
-                     <div
+                  <div className="space-y-4">
+                    {/* Title */}
+                    <h3 className="font-serif text-3xl md:text-4xl font-light text-[#262626] leading-tight">
+                      {item.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="font-sans text-base text-[#6D6D6D] leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Call to Action Button */}
+                  <div className="pt-6">
+                    <div
                       className="inline-flex items-center gap-3 font-sans text-xs tracking-[0.2em] uppercase text-[#262626] group-hover:text-[#D79B42] transition-colors duration-500 font-medium"
                     >
                       <span>{item.cta}</span>

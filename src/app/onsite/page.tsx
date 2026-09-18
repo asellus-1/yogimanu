@@ -11,11 +11,11 @@ import { OnsiteContact } from "./components/OnsiteContact";
 export const metadata: Metadata = {
   title: "Onsite Yoga & Restore | Wellness Programs for Hotels & Properties",
   description:
-    "Bring professional restorative yoga classes, guided travel recovery reset sessions, and premium wellness amenities directly to your hotel guests, residents, or workplace.",
+    "Bring professional restorative yoga classes, guided Travel Recovery Restore sessions, and premium wellness amenities directly to your hotel guests, residents, or workplace.",
   openGraph: {
     title: "Onsite Yoga & Restore | Wellness Programs for Hotels & Properties",
     description:
-      "Bring professional restorative yoga classes, guided travel recovery reset sessions, and premium wellness amenities directly to your hotel guests, residents, or workplace.",
+      "Bring professional restorative yoga classes, guided Travel Recovery Restore sessions, and premium wellness amenities directly to your hotel guests, residents, or workplace.",
     type: "website",
     images: [
       {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Onsite Yoga & Restore | Wellness Programs for Hotels & Properties",
     description:
-      "Bring professional restorative yoga classes, guided travel recovery reset sessions, and premium wellness amenities directly to your hotel guests, residents, or workplace.",
+      "Bring professional restorative yoga classes, guided Travel Recovery Restore sessions, and premium wellness amenities directly to your hotel guests, residents, or workplace.",
     images: ["/images/onsite%20sharing.png"],
   },
 };

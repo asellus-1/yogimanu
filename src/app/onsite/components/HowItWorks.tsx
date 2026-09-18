@@ -19,7 +19,7 @@ const steps = [
   {
     num: "04",
     title: "Guest Relaxation",
-    description: "Your guests enjoy a premium, restorative yoga session, feeling reset and grounded.",
+    description: "Your guests enjoy a premium, restorative yoga session, feeling Restore and grounded.",
   },
 ];
 
@@ -27,7 +27,7 @@ export function HowItWorks() {
   return (
     <section className="bg-[#FCFAF7] py-16 md:py-36 border-t border-[#E8E1D7]">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
-        
+
         {/* Header */}
         <FadeIn>
           <div className="max-w-[560px] mb-16 md:mb-24">

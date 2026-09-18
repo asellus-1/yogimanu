@@ -5,7 +5,7 @@ export function PropertyPartnerships() {
   return (
     <section className="bg-[#F8F5EF] py-16 md:py-36 border-t border-[#E8E1D7]">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
-        
+
         {/* Header */}
         <FadeIn>
           <div className="max-w-[620px] mb-16 md:mb-24">
@@ -24,7 +24,7 @@ export function PropertyPartnerships() {
 
         {/* Partnerships Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
-          
+
           {/* Card 1: Apartments */}
           <FadeIn>
             <div className="group relative flex flex-col h-full bg-[#FCFAF7] border border-[#E8E1D7] rounded-[28px] p-8 md:p-12 hover:border-[#5E7052]/40 hover:shadow-lg transition-all duration-700">
@@ -78,7 +78,7 @@ export function PropertyPartnerships() {
                 <ul className="space-y-2 pt-4 font-sans text-xs text-[#6D6D6D]" role="list">
                   <li className="flex items-center gap-2">
                     <span className="w-1 h-1 rounded-full bg-[#5E7052]" />
-                    Mid-day resets or post-work sessions
+                    Mid-day Restores or post-work sessions
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="w-1 h-1 rounded-full bg-[#5E7052]" />

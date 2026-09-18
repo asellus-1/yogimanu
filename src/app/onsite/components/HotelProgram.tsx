@@ -11,7 +11,7 @@ const programs = [
   },
   {
     icon: Plane,
-    title: "Travel Recovery & Reset",
+    title: "Travel Recovery & Restore",
     time: "60 Minutes · Custom Schedule",
     description:
       "Specifically structured for travelers recovering from long flights and jet lag. Focuses on releasing compression in the back, opening tight shoulders, and grounding the nervous system.",
@@ -29,7 +29,7 @@ export function HotelProgram() {
   return (
     <section id="program-details" className="bg-[#FCFAF7] py-16 md:py-36 border-t border-[#E8E1D7]">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
-        
+
         {/* Section Header */}
         <FadeIn>
           <div className="max-w-[620px] mb-16 md:mb-24">
@@ -41,7 +41,7 @@ export function HotelProgram() {
               <em className="italic">for your guests.</em>
             </h2>
             <p className="font-sans text-base text-[#6D6D6D] leading-relaxed mt-6">
-              Incorporate restorative yoga directly into your hotel&apos;s guest experience. We design sessions specifically tailored to help travelers unwind, reset, and transition into a state of ease.
+              Incorporate restorative yoga directly into your hotel&apos;s guest experience. We design sessions specifically tailored to help travelers unwind, Restore, and transition into a state of ease.
             </p>
           </div>
         </FadeIn>
