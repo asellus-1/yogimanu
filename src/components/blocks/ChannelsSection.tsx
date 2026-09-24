@@ -12,7 +12,7 @@ function YTIcon({ size = 13, className = "" }: { size?: number; className?: stri
 }
 
 // ── Replace with real YouTube channel URLs ────────────────────────────────
-const YOUTUBE_YOGA = "https://www.youtube.com/@yogimanuawakens";
+const YOUTUBE_YOGA = "https://www.youtube.com/@Onsiteyogaandrestore";
 const YOUTUBE_KIRTAN = "https://www.youtube.com/@yogimanumusic";
 const YOUTUBE_SPIRITUALITY = "https://www.youtube.com/@yogimanuawakens";
 // ─────────────────────────────────────────────────────────────────────────
