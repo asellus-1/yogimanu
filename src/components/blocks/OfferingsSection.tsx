@@ -32,7 +32,7 @@ const offeringsList = [
       "Bring professional, restorative yoga instruction directly to your hotel, residential community, or workplace. We provide everything needed – including mats, setup, and cleaning – to help guests and residents Restore.",
     image: "/yoga.jpeg",
     cta: "Explore Program",
-    href: "/onsite",
+    href: "https://onsiteyogaandrestore.com",
     accent: "#5E7052",
   },
 ];

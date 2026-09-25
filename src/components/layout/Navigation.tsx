@@ -9,7 +9,7 @@ import { useContactModal } from "@/components/shared/ContactProvider";
 const navLinks = [
   { href: "/#channels", label: "Channels" },
   { href: "/#bookings", label: "Offerings" },
-  { href: "/onsite", label: "Onsite Yoga" },
+  { href: "https://onsiteyogaandrestore.com", label: "Onsite Yoga" },
   { href: "/shop", label: "Shop" },
   { href: "/#community", label: "Community" },
 ];
