@@ -1,6 +1,7 @@
 "use server";
 
 import { appendToGoogleSheet } from "@/lib/googleSheets";
+import { sendInquiryNotification } from "@/lib/email";
 
 export interface FormResponse {
   success: boolean;
@@ -53,6 +54,20 @@ export async function submitOnsiteInquiry(prevState: unknown, formData: FormData
     email,
     propertyType,
     message,
+  });
+
+  // Send Resend email notification
+  await sendInquiryNotification({
+    subject: `Yogi Manu - New Onsite Yoga Inquiry — ${property}`,
+    replyTo: email,
+    title: "New Onsite Yoga Inquiry",
+    fields: [
+      { label: "Contact Name", value: name },
+      { label: "Property / Organization", value: property },
+      { label: "Email Address", value: email },
+      { label: "Property Type", value: propertyType },
+      { label: "Inquiry Details", value: message },
+    ],
   });
 
   return { success: true };
@@ -119,6 +134,23 @@ export async function submitRetreatInquiry(prevState: unknown, formData: FormDat
     message,
   });
 
+  // Send Resend email notification
+  await sendInquiryNotification({
+    subject: `Yogi Manu - New Retreat Inquiry — ${organization}`,
+    replyTo: email,
+    title: "New Retreat Collaboration Inquiry",
+    fields: [
+      { label: "Full Name", value: name },
+      { label: "Organization / Retreat", value: organization },
+      { label: "Email Address", value: email },
+      { label: "Event Type", value: eventType },
+      { label: "Location", value: location },
+      { label: "Preferred Dates", value: dates },
+      { label: "Expected Audience Size", value: audienceSize },
+      { label: "Event Details / Message", value: message },
+    ],
+  });
+
   return { success: true };
 }
 
@@ -159,5 +191,18 @@ export async function submitContactInquiry(prevState: unknown, formData: FormDat
     message,
   });
 
+  // Send Resend email notification
+  await sendInquiryNotification({
+    subject: "Yogi Manu - New Contact Inquiry",
+    replyTo: email,
+    title: "New General Contact Inquiry",
+    fields: [
+      { label: "Name", value: name },
+      { label: "Email Address", value: email },
+      { label: "Message", value: message },
+    ],
+  });
+
   return { success: true };
 }
+
