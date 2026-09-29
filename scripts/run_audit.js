@@ -125,12 +125,12 @@ function analyzePageFiles() {
 
   pages.forEach(p => {
     let combinedContent = '';
-    
+
     // Read page entry file
     if (fs.existsSync(p.entry)) {
       combinedContent += fs.readFileSync(p.entry, 'utf8') + '\n';
     }
-    
+
     // Read components
     p.components.forEach(compPath => {
       if (fs.existsSync(compPath)) {
@@ -204,7 +204,7 @@ function analyzePageFiles() {
       const re = new RegExp(w, 'gi');
       firsthandCount += (combinedContent.match(re) || []).length;
     });
-    
+
     let firsthandScore = 0;
     if (wordCount > 0) {
       const density = firsthandCount / wordCount;
@@ -220,7 +220,7 @@ function analyzePageFiles() {
       const re = new RegExp(p, 'gi');
       commodityCount += (combinedContent.match(re) || []).length;
     });
-    
+
     let commodityScore = 100;
     if (commodityCount > 2) commodityScore = 25;
     else if (commodityCount > 0) commodityScore = 75;
@@ -236,7 +236,7 @@ function analyzePageFiles() {
     if (combinedContent.includes('Amazon') || combinedContent.includes('sponsored')) {
       infoGainItems.push('third-party affiliate context');
     }
-    
+
     let infoGainScore = 50; // default medium
     if (infoGainItems.length >= 2 && firsthandScore === 100) infoGainScore = 90;
     else if (infoGainItems.length >= 1) infoGainScore = 75;
@@ -302,7 +302,7 @@ function calculateScorecard(configs, pages) {
   if (configs.allowsPerplexity) crawlScore += 2;
   if (configs.allowsBing) crawlScore += 2;
   if (configs.allowsGoogle) crawlScore += 2;
-  
+
   // Normalized crawlScore is out of 15
   const finalCrawl = Math.round((crawlScore / 15) * 15);
 
@@ -685,7 +685,7 @@ function run() {
   console.log(`Audit JSON results saved successfully to: ${auditJsonPath}`);
 
   // 2. Generate Markdown Report
-  let md = `# AI Search Visibility Audit Report — Yogi Manu
+  let md = `# AI Search Visibility Audit Report – Yogi Manu
 
 **Website:** yogimanu.com  
 **Audit Date:** ${new Date().toLocaleDateString()}  
@@ -726,7 +726,7 @@ Yogi Manu’s website has a solid, lightweight, and modern technical foundation,
 
   // Sort issues by impact
   const sortedIssues = issues.sort((a, b) => b.impact - a.impact);
-  
+
   sortedIssues.forEach((issue, idx) => {
     md += `### ${idx + 1}. [${issue.severity.toUpperCase()}] ${issue.problem}
 - **Category:** ${issue.category}

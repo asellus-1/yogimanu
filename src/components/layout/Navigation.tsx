@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useContactModal } from "@/components/shared/ContactProvider";
 
 const navLinks = [
   { href: "/#channels", label: "Channels" },
@@ -24,7 +23,6 @@ function scrollToSection(id: string) {
 export function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { openContactModal } = useContactModal();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setMenuOpen(false);
@@ -84,10 +82,11 @@ export function Navigation() {
             </li>
           ))}
           <li>
-            <button
-              onClick={openContactModal}
+            <Link
+              href="/#contact"
+              onClick={(e) => handleClick(e, "/#contact")}
               className={[
-                "font-sans text-[11px] tracking-[0.18em] uppercase cursor-pointer bg-transparent border-none",
+                "font-sans text-[11px] tracking-[0.18em] uppercase",
                 "transition-colors duration-300 relative",
                 isHome ? "text-white/80 hover:text-white" : "text-[#6D6D6D] hover:text-[#262626]",
                 "after:absolute after:bottom-[-3px] after:left-0 after:w-0 after:h-[1px]",
@@ -96,7 +95,7 @@ export function Navigation() {
               ].join(" ")}
             >
               Contact
-            </button>
+            </Link>
           </li>
         </ul>
 
@@ -138,15 +137,16 @@ export function Navigation() {
             </li>
           ))}
           <li>
-            <button
-              onClick={() => {
+            <Link
+              href="/#contact"
+              onClick={(e) => {
                 setMenuOpen(false);
-                openContactModal();
+                handleClick(e, "/#contact");
               }}
-              className="font-sans text-[11px] tracking-[0.18em] uppercase text-[#6D6D6D] hover:text-[#262626] transition-colors duration-300 cursor-pointer bg-transparent border-none text-left"
+              className="font-sans text-[11px] tracking-[0.18em] uppercase text-[#6D6D6D] hover:text-[#262626] transition-colors duration-300"
             >
               Contact
-            </button>
+            </Link>
           </li>
         </ul>
       </div>

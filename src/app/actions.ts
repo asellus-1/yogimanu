@@ -58,7 +58,7 @@ export async function submitOnsiteInquiry(prevState: unknown, formData: FormData
 
   // Send Resend email notification
   await sendInquiryNotification({
-    subject: `Yogi Manu - New Onsite Yoga Inquiry — ${property}`,
+    subject: `Yogi Manu - New Onsite Yoga Inquiry – ${property}`,
     replyTo: email,
     title: "New Onsite Yoga Inquiry",
     fields: [
@@ -136,7 +136,7 @@ export async function submitRetreatInquiry(prevState: unknown, formData: FormDat
 
   // Send Resend email notification
   await sendInquiryNotification({
-    subject: `Yogi Manu - New Retreat Inquiry — ${organization}`,
+    subject: `Yogi Manu - New Retreat Inquiry – ${organization}`,
     replyTo: email,
     title: "New Retreat Collaboration Inquiry",
     fields: [
