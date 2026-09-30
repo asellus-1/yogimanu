@@ -10,7 +10,6 @@ import { BeginSection } from "@/components/blocks/BeginSection";
 import { DailyPracticeSection } from "@/components/blocks/DailyPracticeSection";
 import { CommunitySection } from "@/components/blocks/CommunitySection";
 import { SupportSection } from "@/components/blocks/SupportSection";
-import { ContactSection } from "@/components/blocks/ContactSection";
 
 export const metadata: Metadata = {
   title: "Yogi Manu | Yoga, Kirtan & Spiritual Teachings",
@@ -38,7 +37,6 @@ export default function HomePage() {
       <DailyPracticeSection />
       <CommunitySection />
       <SupportSection />
-      <ContactSection />
     </>
   );
 }
